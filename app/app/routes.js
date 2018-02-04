@@ -18,7 +18,7 @@ function getTodos(res) {
 
 function runScript(uniqFilename, fileInfo) {
     var filePath = path.join(__dirname, '..', 'images', uniqFilename);
-    var scriptPath = '/home/user/projects/cv/dark/darkflow/test.py';
+    var scriptPath = '/home/user/projects/cv/dark/darkflow/run.py';
 
     exec('python3 ' + scriptPath + '  ' + filePath, (err, stdout, stderr) => {
         if (err) {
