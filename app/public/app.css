@@ -1,0 +1,18 @@
+#upload_button {
+  display: inline-block;
+}
+#upload_button input[type=file] {
+  display:none;
+}
+
+.span-custom {
+	border : 0px;
+	padding: 0px;
+}
+
+.button-custom {
+	border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}

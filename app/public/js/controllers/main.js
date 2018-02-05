@@ -1,7 +1,7 @@
 angular.module('todoController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
+	.controller('mainController', ['$scope','$http','Todos', 'Images', function($scope, $http, Todos, Images) {
 		$scope.formData = {};
 		$scope.loading = true;
 
@@ -47,4 +47,15 @@ angular.module('todoController', [])
 					$scope.todos = data; // assign our new list of todos
 				});
 		};
+
+		$scope.searchByContent = function(text) {
+			$scope.loading = true;
+
+			Images.get(text)
+				.success(function(data) {
+					$scope.loading = false;
+					$scope.images = data;
+					console.log("Images: ", data);
+				});
+		}
 	}]);
