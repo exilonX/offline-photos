@@ -17,7 +17,7 @@ function getTodos(res) {
 
 
 function runScript(uniqFilename, fileInfo) {
-    var filePath = path.join(__dirname, '..', 'images', uniqFilename);
+    var filePath = path.join(__dirname, '..', 'images', uniqFilename + '.jpg');
     var scriptPath = '/home/user/projects/cv/dark/darkflow/run.py';
 
     exec('python3 ' + scriptPath + '  ' + filePath, (err, stdout, stderr) => {
@@ -123,7 +123,7 @@ module.exports = function (app) {
         let sampleFile = req.files.file;
         console.log(req.files.file);
         var uniqFilename = uuidv1();
-        var jsonPath = path.join(__dirname, '..', 'images', uniqFilename);
+        var jsonPath = path.join(__dirname, '..', 'images', uniqFilename + '.jpg');
         
         // Use the mv() method to place the file somewhere on your server
         sampleFile.mv(jsonPath, function(err) {
