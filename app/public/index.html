@@ -12,6 +12,7 @@
 	<!-- SCROLLS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="app.css">
 	<style>
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
@@ -24,6 +25,7 @@
 
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
 	<script src="js/services/todos.js"></script> <!-- load our todo service -->
+	<script src="js/services/image.js"></script> <!-- load our image service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
@@ -33,17 +35,21 @@
 
 		<!-- HEADER AND TODO COUNT -->
 		<div class="jumbotron text-center">
-			<h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
+			<h1>Local Discovery 
+				<span>
+					<img src="resources/images/magnify.png" height="42" width="42">
+				</span>
+			</h1>
 		</div>
 
 		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+		<!-- <div id="todo-list" class="row"> -->
+			<!-- <div class="col-sm-4 col-sm-offset-4"> -->
 
 				
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="todo in todos">
+				<!-- <div class="checkbox" ng-repeat="todo in todos">
 					<label>
 						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
 					</label>
@@ -53,40 +59,61 @@
 					<span class="fa fa-spinner fa-spin fa-3x"></span>
 				</p>
 
-			</div>
-		</div>
+			</div> -->
+		<!-- </div> -->
 
 		<!-- FORM TO CREATE TODOS -->
 		<div id="todo-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
-					<div class="form-group">
+					<div class="input-group">
 
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+						<input type="text" class="form-control input-lg text-center" placeholder="Search for images..." ng-model="formData.text">
+						<span class="input-group-addon span-custom"><button type="submit" class="btn btn-primary btn-lg button-custom" ng-click="searchByContent(formData.text)">Search</button></span>
 					</div>
 
-					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+				
 				</form>
 
-			    <form ref='uploadForm' 
-			      id='uploadForm' 
-			      action='http://localhost:8080/upload' 
-			      method='post'
-			      class="form-group"
-			      encType="multipart/form-data">
-			        <input type="file" name="file" >
-			        <input type='submit' value='Upload!' class="btn btn-primary btn-lg" />
-			    </form>
+				<!-- <div id="upload_button">
+				<label>
+					
+				  <input type="file" ngf-select ng-model="new_files" ng-change="fs.uploadFiles(new_files)" multiple>
+				  <span class="btn btn-primary">Upload files</span>
+				</label>
 
+				</div> -->
+
+				<form ref='uploadForm' 
+		      		id='uploadForm' 
+		      		action='http://localhost:8080/upload' 
+		      		method='post'
+		      		class="form-group"
+		      		encType="multipart/form-data">
+		        	<input type="file" name="file" >
+		        	<input type='submit' value='Upload!' class="btn btn-primary btn-lg" />
+		   	 	</form>
 			</div>
 		</div>
 
-		<div class="text-center text-muted">
-			<p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
-			<p>Read the <a href="http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular">tutorial</a>.</p>
+		 <div class="row">
+			<div class="col-md-4" ng-repeat="image in images">
+				<div class="thumbnail">
+				  <a href="{{'images/' + image.uniqueFilename}}">
+				    <img src="{{'images/' + image.uniqueFilename}}" alt="{{image.realName}}" style="width:100%">
+				    <div class="caption">
+				      <p>{{image.realName}}</p>
+				    </div>
+				  </a>
+				</div>
+			</div>
 		</div>
+
+		<!-- <div class="text-center text-muted"> -->
+			<!-- <p>A demo by <a href="http://scotch.io">Scotch</a>.</p> -->
+			<!-- <p>Read the <a href="http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular">tutorial</a>.</p> -->
+		<!-- </div> -->
 
 	</div>
 

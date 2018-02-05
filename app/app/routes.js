@@ -17,8 +17,8 @@ function getTodos(res) {
 
 
 function runScript(uniqFilename, fileInfo) {
-    var filePath = path.join(__dirname, '..', 'images', uniqFilename);
-    var scriptPath = '/home/user/projects/cv/dark/darkflow/run.py';
+    var filePath = path.join(__dirname, '..', 'public', 'images', uniqFilename);
+    var scriptPath = '/home/ubuntu/git_projects/offline-photos/darkflow/run.py';
 
     exec('python3 ' + scriptPath + '  ' + filePath, (err, stdout, stderr) => {
         if (err) {
@@ -117,13 +117,14 @@ module.exports = function (app) {
         if (!req.files)
             return res.status(400).send('No files were uploaded.');
         
-        // console.log(req.files);
+        console.log(req.files);
 
         // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    
         let sampleFile = req.files.file;
         console.log(req.files.file);
         var uniqFilename = uuidv1();
-        var jsonPath = path.join(__dirname, '..', 'images', uniqFilename);
+        var jsonPath = path.join(__dirname, '..', 'public', 'images', uniqFilename);
         
         // Use the mv() method to place the file somewhere on your server
         sampleFile.mv(jsonPath, function(err) {
