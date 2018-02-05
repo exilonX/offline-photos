@@ -85,10 +85,12 @@ def return_predict(self, im):
     boxes = self.framework.findboxes(out)
     threshold = self.FLAGS.threshold
     boxesInfo = list()
+    processedBoxes = []
     for box in boxes:
         tmpBox = self.framework.process_box(box, h, w, threshold)
         if tmpBox is None:
             continue
+        processedBoxes.append(tmpBox)
         boxesInfo.append({
             "label": tmpBox[4],
             "confidence": tmpBox[6],
@@ -99,7 +101,7 @@ def return_predict(self, im):
                 "x": tmpBox[1],
                 "y": tmpBox[3]}
         })
-    return boxesInfo
+    return boxesInfo, processedBoxes
 
 import math
 
