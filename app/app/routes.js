@@ -91,7 +91,7 @@ module.exports = function (app) {
             'info' : {
                 $elemMatch : {
                     label : req.params.label,
-                    confidence : { $gte: 0.5 }
+                    confidence : { $gte: 0.25 }
                 }
             }
         }, function(err, data) {
